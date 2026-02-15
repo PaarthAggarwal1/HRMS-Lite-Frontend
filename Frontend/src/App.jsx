@@ -10,7 +10,7 @@ const App = () => {
   useEffect(() => {
     const getCsrfToken = async () => {
       try {
-        const response = await fetch('/api/csrf-token/', {
+        const response = await fetch('https://hrms-lite-backend-0122.onrender.com/api/csrf-token/', {
           credentials: 'include',
         });
       } catch (error) {
