@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { CheckCircle2, XCircle } from "lucide-react";
 
-const EMP_API = "/api/employees/";
-const ATT_API = "/api/attendance/";
+const EMP_API = "https://hrms-lite-backend-0122.onrender.com/api/employees/";
+const ATT_API = "https://hrms-lite-backend-0122.onrender.com/api/attendance/";
 
 function getCsrfToken() {
   const name = 'csrftoken';

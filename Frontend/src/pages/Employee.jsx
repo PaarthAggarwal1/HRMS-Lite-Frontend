@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Search, Plus, Trash2, Pen } from "lucide-react";
 import axios from "axios";
 
-const API = "/api/employees/";
+const API = "https://hrms-lite-backend-0122.onrender.com/api/employees/";
 
 function getCsrfToken() {
     const name = 'csrftoken';

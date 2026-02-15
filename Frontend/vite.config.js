@@ -8,13 +8,13 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://hrms-lite-backend-0122.onrender.com',
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     '/api': {
+  //       target: 'https://hrms-lite-backend-0122.onrender.com',
+  //       changeOrigin: true,
+  //       secure: false,
+  //     },
+  //   },
+  // },
 })
