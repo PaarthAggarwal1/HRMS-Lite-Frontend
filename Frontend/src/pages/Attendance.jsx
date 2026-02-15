@@ -36,7 +36,9 @@ export default function Attendance() {
 
     const fetchEmployees = async () => {
         try {
-            const response = await axios.get(EMP_API);
+            const response = await axios.get(EMP_API, {
+                withCredentials: true,
+            });
             setEmployees(response.data);
         } catch (error) {
             console.error("Error fetching employees:", error);
@@ -47,6 +49,7 @@ export default function Attendance() {
         try {
             const response = await axios.get(ATT_API, {
                 params: { date },
+                withCredentials: true,
             });
             // Convert array to object with employeeId as key
             const attendanceMap = {};
@@ -70,6 +73,7 @@ export default function Attendance() {
                 date,
                 status,
             }, {
+                withCredentials: true,
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRFToken": getCsrfToken(),

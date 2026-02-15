@@ -46,7 +46,9 @@ export default function Employees() {
 
     const fetchEmployees = async () => {
         try {
-            const response = await axios.get(API);
+            const response = await axios.get(API, {
+                withCredentials: true,
+            });
             setEmployees(response.data);
         } catch (error) {
             console.error("Error fetching employees:", error);
@@ -71,6 +73,7 @@ export default function Employees() {
                     role: formData.role,
                     id: editingId,
                 }, {
+                    withCredentials: true,
                     headers: {
                         "Content-Type": "application/json",
                         "X-CSRFToken": getCsrfToken(),
@@ -78,6 +81,7 @@ export default function Employees() {
                 });
             } else {
                 await axios.post(API, formData, {
+                    withCredentials: true,
                     headers: {
                         "Content-Type": "application/json",
                         "X-CSRFToken": getCsrfToken(),
@@ -96,6 +100,7 @@ export default function Employees() {
     const handleDelete = async (id) => {
         try {
             await axios.delete(API, {
+                withCredentials: true,
                 data: { id },
                 headers: {
                     "Content-Type": "application/json",
