@@ -6,14 +6,16 @@ import Employees from "./pages/Employee";
 import Attendance from "./pages/Attendance";
 import NotFound from "./pages/NotFound";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
 const App = () => {
 
   useEffect(() => {
     const getCsrfToken = async () => {
       try {
-        const response = await axios.get('https://hrms-lite-backend-0122.onrender.com/api/csrf-token/', {
-          withCredentials: true,
-        });
+        const response = await axios.get('https://hrms-lite-backend-0122.onrender.com/api/csrf-token/');
       } catch (error) {
         console.error("Error fetching CSRF token");
       }
