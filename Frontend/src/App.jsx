@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Layout from "./pages/Layout";
+import axios from "axios";
 import Employees from "./pages/Employee";
 import Attendance from "./pages/Attendance";
 import NotFound from "./pages/NotFound";
@@ -10,8 +11,8 @@ const App = () => {
   useEffect(() => {
     const getCsrfToken = async () => {
       try {
-        const response = await fetch('https://hrms-lite-backend-0122.onrender.com/api/csrf-token/', {
-          credentials: 'include',
+        const response = await axios.get('https://hrms-lite-backend-0122.onrender.com/api/csrf-token/', {
+          withCredentials: true,
         });
       } catch (error) {
         console.error("Error fetching CSRF token");
