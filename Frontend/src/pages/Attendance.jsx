@@ -5,10 +5,6 @@ import { CheckCircle2, XCircle } from "lucide-react";
 const EMP_API = "https://hrms-lite-backend-0122.onrender.com/api/employees/";
 const ATT_API = "https://hrms-lite-backend-0122.onrender.com/api/attendance/";
 
-axios.defaults.withCredentials = true;
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
-
 export default function Attendance() {
     const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
     const [employees, setEmployees] = useState([]);
@@ -24,9 +20,7 @@ export default function Attendance() {
 
     const fetchEmployees = async () => {
         try {
-            const response = await axios.get(EMP_API, {
-                withCredentials: true,
-            });
+            const response = await axios.get(EMP_API);
             setEmployees(response.data);
         } catch (error) {
             console.error("Error fetching employees:", error);
@@ -37,7 +31,6 @@ export default function Attendance() {
         try {
             const response = await axios.get(ATT_API, {
                 params: { date },
-                withCredentials: true,
             });
             // Convert array to object with employeeId as key
             const attendanceMap = {};

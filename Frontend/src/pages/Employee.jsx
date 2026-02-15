@@ -4,10 +4,6 @@ import axios from "axios";
 
 const API = "https://hrms-lite-backend-0122.onrender.com/api/employees/";
 
-axios.defaults.withCredentials = true;
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
-
 export default function Employees() {
     const [employees, setEmployees] = useState([]);
 
@@ -34,9 +30,7 @@ export default function Employees() {
 
     const fetchEmployees = async () => {
         try {
-            const response = await axios.get(API, {
-                withCredentials: true,
-            });
+            const response = await axios.get(API);
             setEmployees(response.data);
         } catch (error) {
             console.error("Error fetching employees:", error);
@@ -84,11 +78,9 @@ export default function Employees() {
     const handleDelete = async (id) => {
         try {
             await axios.delete(API, {
-                withCredentials: true,
                 data: { id },
                 headers: {
                     "Content-Type": "application/json",
-                    "X-CSRFToken": getCsrfToken(),
                 },
             });
             fetchEmployees();
