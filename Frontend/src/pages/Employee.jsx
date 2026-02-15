@@ -4,21 +4,9 @@ import axios from "axios";
 
 const API = "https://hrms-lite-backend-0122.onrender.com/api/employees/";
 
-function getCsrfToken() {
-    const name = 'csrftoken';
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 export default function Employees() {
     const [employees, setEmployees] = useState([]);
@@ -73,18 +61,14 @@ export default function Employees() {
                     role: formData.role,
                     id: editingId,
                 }, {
-                    withCredentials: true,
                     headers: {
                         "Content-Type": "application/json",
-                        "X-CSRFToken": getCsrfToken(),
                     },
                 });
             } else {
                 await axios.post(API, formData, {
-                    withCredentials: true,
                     headers: {
                         "Content-Type": "application/json",
-                        "X-CSRFToken": getCsrfToken(),
                     },
                 });
             }

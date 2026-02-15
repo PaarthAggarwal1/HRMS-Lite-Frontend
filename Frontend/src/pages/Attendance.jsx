@@ -5,21 +5,9 @@ import { CheckCircle2, XCircle } from "lucide-react";
 const EMP_API = "https://hrms-lite-backend-0122.onrender.com/api/employees/";
 const ATT_API = "https://hrms-lite-backend-0122.onrender.com/api/attendance/";
 
-function getCsrfToken() {
-  const name = 'csrftoken';
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.substring(0, name.length + 1) === (name + '=')) {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
-      }
-    }
-  }
-  return cookieValue;
-}
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 export default function Attendance() {
     const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
@@ -73,10 +61,8 @@ export default function Attendance() {
                 date,
                 status,
             }, {
-                withCredentials: true,
                 headers: {
                     "Content-Type": "application/json",
-                    "X-CSRFToken": getCsrfToken(),
                 },
             });
             fetchAttendance();
